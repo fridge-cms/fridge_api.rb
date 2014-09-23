@@ -1,0 +1,25 @@
+PATH
+  remote: .
+  specs:
+    fridge_api (0.1)
+      sawyer (~> 0.5.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.6)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    multipart-post (2.0.0)
+    rake (10.3.2)
+    sawyer (0.5.5)
+      addressable (~> 2.3.5)
+      faraday (~> 0.8, < 0.10)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0)
+  fridge_api!
+  rake
