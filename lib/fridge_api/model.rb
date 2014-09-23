@@ -46,6 +46,10 @@ module FridgeApi
       @attrs.has_key?(method.to_sym) ? @attrs[method.to_sym] : super
     end
 
+    def attrs
+      @attrs
+    end
+
     private
 
     def parse
