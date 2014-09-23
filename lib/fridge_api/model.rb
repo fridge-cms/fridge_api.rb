@@ -19,7 +19,7 @@ module FridgeApi
     def commit
       @raw.each do |key, val|
         if val.kind_of? Array
-          if val.first[:part_definition_id]
+          if is_part? val
             val.each do |i, part|
               part_name = part_name(part)
               unless part_value(part) == @attrs[part_name]
@@ -56,7 +56,7 @@ module FridgeApi
       hash = {}
       @raw.each do |key, val|
         if val.kind_of? Array
-          if val.first[:part_definition_id]
+          if is_part? val
             val.each do |part|
               hash[part_name(part)] = part_value(part)
             end
@@ -70,6 +70,10 @@ module FridgeApi
         hash[key] = val
       end
       hash
+    end
+
+    def is_part?(val)
+      val.first && val.first[:part_definition_id]
     end
 
     def part_name(part)

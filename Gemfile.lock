@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fridge_api (0.1)
+    fridge_api (0.1.1)
       sawyer (~> 0.5.3)
 
 GEM
