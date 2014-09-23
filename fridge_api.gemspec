@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Mike Kruk"]
   spec.description = %q{Simple wrapper for the Fridge API}
   spec.email = ['mike@ripeworks.com']
-  spec.files = %w(Rakefile fridge_api.gemspec)
+  spec.files = %w(Rakefile LICENSE.md README.md fridge_api.gemspec)
   spec.files += Dir.glob("lib/**/*.rb")
   spec.homepage = 'https://github.com/fridge-cms/fridge_api.rb'
   spec.licenses = ['MIT']
