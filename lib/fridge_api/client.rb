@@ -1,5 +1,6 @@
 require 'sawyer'
 require 'fridge_api/options'
+require 'fridge_api/error'
 
 module FridgeApi
 
@@ -58,6 +59,9 @@ module FridgeApi
 
     def refresh_token!
       res = post("oauth/token", application_authentication)
+      if @last_response.status != 200
+        raise FridgeApi::Unauthorized
+      end
       @access_token = res.access_token
       reset_agent
     end
