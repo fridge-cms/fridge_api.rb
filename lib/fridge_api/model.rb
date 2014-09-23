@@ -3,13 +3,17 @@ require 'json'
 module FridgeApi
   class Model
 
+    def self.new_from_part(part, data)
+      # TODO
+    end
+
     def initialize(resource)
       @raw = resource.to_h
-      @hash = parse
+      @attrs = parse
     end
 
     def inspect
-      p @hash
+      p @attrs
     end
 
     def commit
@@ -18,16 +22,28 @@ module FridgeApi
           if val.first[:part_definition_id]
             val.each do |i, part|
               part_name = part_name(part)
-              unless part_value(part) == @hash[part_name]
-                @raw[key][i][:value] = @hash[part_name]
+              unless part_value(part) == @attrs[part_name]
+                @raw[key][i][:value] = @attrs[part_name]
               end
             end
             return
           end
         end
 
-        @raw[key] = @hash[key] unless val == @hash[key]
+        @raw[key] = @attrs[key] unless val == @attrs[key]
       end
+    end
+
+    # Allow fields to be retrieved via Hash notation
+    def [](method)
+      send(method.to_sym)
+    rescue NoMethodError
+      nil
+    end
+
+    # Retrieve field value
+    def method_missing(method, *args)
+      @attrs.has_key?(method.to_sym) ? @attrs[method.to_sym] : super
     end
 
     private

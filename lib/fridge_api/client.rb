@@ -55,7 +55,7 @@ module FridgeApi
         refresh_token!
         return request(method, path, data, options)
       end
-      res.data
+      parse res.data
     end
 
     def refresh_token!
@@ -67,6 +67,17 @@ module FridgeApi
       reset_agent
     end
 
+    def to_model(data)
+      if is_fridge_object?(data)
+        data = Model.new(data)
+      end
+      data
+    end
+
+    def is_fridge_object?(obj)
+      obj.key?(:id) || obj.key?(:uuid)
+    end
+
     private
 
     def application_authentication
@@ -76,5 +87,16 @@ module FridgeApi
         :client_secret => @client_secret
       }
     end
+
+    def parse(data)
+      if data.kind_of? Array
+        return data.map do |v|
+          to_model v
+        end
+      end
+
+      to_model data
+    end
+
   end
 end
