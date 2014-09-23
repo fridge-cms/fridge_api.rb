@@ -1,6 +1,7 @@
 require 'sawyer'
 require 'fridge_api/options'
 require 'fridge_api/error'
+require 'fridge_api/model'
 
 module FridgeApi
 
