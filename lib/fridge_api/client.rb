@@ -75,7 +75,7 @@ module FridgeApi
     end
 
     def is_fridge_object?(obj)
-      obj.key?(:id) || obj.key?(:uuid)
+      obj.respond_to?("key?") && (obj.key?(:id) || obj.key?(:uuid))
     end
 
     private
