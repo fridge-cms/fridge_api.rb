@@ -84,9 +84,15 @@ module FridgeApi
     def part_value(part)
       value ||= part[:value]
 
-      if part[:part]
+      # convert file/image hashes into objects
+      if part[:part] && part[:value]
         if part[:part][:type] == "file" || part[:part][:type] == "image"
-          value = JSON.parse part[:value]
+          case part[:value]
+          when Array
+            value = part[:value].map {|v| JSON.parse(v) }
+          when String
+            value = JSON.parse part[:value]
+          end
         end
       end
 
