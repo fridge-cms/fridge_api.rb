@@ -58,6 +58,10 @@ module FridgeApi
             val.each do |part|
               hash[part_name(part)] = part_value(part)
             end
+          elsif is_part_definition? val
+            val.each do |part_definition|
+              hash[part_name(part_definition)] = part_definition
+            end
           else
             hash[key] = val.map do |v|
               v[:id] ? Model.new(v) : v
@@ -72,6 +76,10 @@ module FridgeApi
 
     def is_part?(val)
       val.first && val.first[:part_definition_id]
+    end
+
+    def is_part_definition?(val)
+      val.first && val.first[:definition_id] && val.first[:definition_type]
     end
 
     def part_name(part)
