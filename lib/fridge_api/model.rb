@@ -79,7 +79,7 @@ module FridgeApi
     end
 
     def is_part_definition?(val)
-      val.first && val.first[:definition_id] && val.first[:definition_type]
+      val.first && val.first[:definition_id]
     end
 
     def part_name(part)
