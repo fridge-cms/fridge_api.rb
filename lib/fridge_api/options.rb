@@ -2,7 +2,7 @@ module FridgeApi
   module Options
 
     DEFAULTS = {
-      :api_endpoint => "http://api.fridgecms.com/v1"
+      :api_endpoint => "https://api.fridgecms.com/v1"
     }
 
     attr_accessor :access_token, :client_id, :client_secret
